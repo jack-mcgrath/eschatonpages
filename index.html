@@ -41,7 +41,7 @@ function setup(){
                 for (var i=0; i<tN; i++){
                         while(done==0){
                                 teams[i]=prompt("Assign a nation to team "+[i+1]+" (just enter the number):\n1. AMNAT (USA and NATO Nations\n2. SOVWAR (Soviet Union and WARSAW Nations)\n3. REDCHI (China)\n4. IRLYBSIR (Israel, Lybia, Syria)\n5. INDPAK (India and Pakistan)\n6. Custom Team");
-                                if(!isNaN(teams[i])){
+                                if(!isNaN(teams[i])||teams[i]<=6){
                                         done=1;
                                 }
                         }
