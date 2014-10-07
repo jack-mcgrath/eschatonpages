@@ -1,6 +1,6 @@
 function setup(){
         var declare=null; //game type declaration
-        var tN = null; //number of teams
+        var tN = null; //number of teams, yo
         var z=1; //# of custom teams
         var teams = new Array();
         var done=0;
