@@ -1,5 +1,5 @@
 function setup(){
-        var declare=null; //game type declaration
+        var declare=null; //game type declaration, yo
         var tN = null; //number of teams, yo
         var z=1; //# of custom teams
         var teams = new Array();
@@ -571,5 +571,5 @@ function makeTeamsStandard(teams, tN, z){
                                 default:
                                 break; 
                 }
-        }
+        } //THERE HAS TO BE A BETTER WAY
 }
