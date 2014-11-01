@@ -593,6 +593,25 @@ h1.serif {font-family: 'Lato', Arial, Helvetica, sans-serif;}
 <style type="text/css"></style>
 </head>
 <body>
+<script>
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '353289798180135',
+      xfbml      : true,
+      version    : 'v2.2'
+    });
+
+    // ADD ADDITIONAL FACEBOOK CODE HERE
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+</script>
 <br>
 <h1 class="serif" style="margin-left:2.5em;">Eschaton Lite</h1>
 <center><input type=button value="Launch Eschaton!"
