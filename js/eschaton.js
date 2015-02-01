@@ -1,22 +1,19 @@
-<!DOCTYPE html>
- 
-                                                                        <!--for David Foster Wallace-->
- 
-<HTML>
-<head>
-<meta charset="UTF-8">
-<title>Eschaton, YDAU</title>
-<<<<<<< Updated upstream
-<script type=text/javascript>
 "use strict";
 function setup(){
-        var declare=null; //game type declaration (do i really need to initialize this)
+        var declare=null; //game type declaration
         var tN = null; //number of teams
         var z=1; //# of custom teams
         var teams = new Array();
         var done=0;
+        var consent=false;
         while(true){
                 declare=prompt("Choose game type:\nStandard\nCustom");
+                if(declare=="defcon"){
+                        teams[0]=1;
+                        teams[1]=2;
+                        teams=makeTeamsStandard(teams, 2);  
+                        gameplay(teams, 2);
+                }
                 if(declare==null){
                         return;
                 }
@@ -42,7 +39,7 @@ function setup(){
                 for (var i=0; i<tN; i++){
                         while(done==0){
                                 teams[i]=prompt("Assign a nation to team "+[i+1]+" (just enter the number):\n1. AMNAT (USA and NATO Nations\n2. SOVWAR (Soviet Union and WARSAW Nations)\n3. REDCHI (China)\n4. IRLYBSIR (Israel, Lybia, Syria)\n5. INDPAK (India and Pakistan)\n6. Custom Team");
-                                if(!isNaN(teams[i])||teams[i]<=6){
+                                if(!isNaN(teams[i])){
                                         done=1;
                                 }
                         }
@@ -73,7 +70,7 @@ function setup(){
                         if(tN==null){
                                 return;
                         }
-                        if(!isNaN(tN)&&tN!=""&&tN<=10){
+                        if(!isNaN(tN)&&tN!=""&&tN<=5){
                                 break;
                         }
                         while(tN>=5){
@@ -84,7 +81,7 @@ function setup(){
                         done=0;
                         while(done==0){
                                 teams[i]=prompt("Assign a nation to team "+[i+1]+" (just enter the number):\n1. AMNAT (USA and NATO Nations\n2. SOVWAR (Soviet Union and WARSAW Nations)\n3. REDCHI (China)\n4. IRLYBSIR (Israel, Lybia, Syria)\n5. INDPAK (India and Pakistan)");
-                                if(!isNaN(teams[i])&&teams[i]<=5&&teams[i]>=1&&teams[i]!=""){
+                                if(!isNaN(teams[i])&&teams[i]<=5&&teams[i]>=1&&teams[i]!=""&&teams[i]!=null){
                                         done=1;
                                 }
                         }
@@ -298,6 +295,7 @@ function awardpoints(teams, tN){
 function defcon(teams, tN){
         var done=0;
         var input;
+        var consent = false;
         while (done==0){
                 input=prompt("Nation declaring DEFCON adjustment:");
                 input=input.toUpperCase();
@@ -309,9 +307,15 @@ function defcon(teams, tN){
                                                 alert("Maximum DEFCON level is 5.");
                                         }
                                         if(input<=5){
-                                                teams[s].dfcn=input;
-                                                alert(teams[s].name+" IS NOW AT DEFCON "+teams[s].dfcn+".");
-                                                done=1;
+                                                consent=prompt("Confirm DEFCON level "+input+".\n Enter CONFIRM or BACK");
+                                                if(consent.equals("CONFIRM")){
+                                                        teams[s].dfcn=input;
+                                                        alert(teams[s].name+" IS NOW AT DEFCON "+teams[s].dfcn+".");
+                                                        done=1;
+                                                }       
+                                                else{
+                                                        gameplay(teams, tN);
+                                                }
                                         }
                                 }
                         }
@@ -392,10 +396,10 @@ function stats(teams, tN){
         var points="";
         var info="PUBLIC INFORMATION\n";
         for (var b=0; b<tN; b++){
-                                alert("CLASSIFIED INFORMATION AVAILABLE ONLY TO\nGAME MASTER AND "+teams[b].name+"'S HEADS OF STATE\n\nTeam "+(b+1)+": "+teams[b].name+"\nTotal points: "+Math.floor(teams[b].pts)+"\nDEFCON LEVEL: "+teams[b].dfcn+"\nMissile installations: "+teams[b].mi+"\nCities intact: "+teams[b].mama+"\nPopulation: "+(teams[b].pop*250000)+"\nNuclear Subs: "+teams[b].subs+"\nBombs remaining: "+teams[b].mgt);
-                                points=points+teams[b].name+" points: "+Math.round(teams[b].pts)+". DEFCON: "+teams[b].dfcn+".\n";
-                        }
-                        alert(info+points);
+                alert("CLASSIFIED INFORMATION AVAILABLE ONLY TO\nGAME MASTER AND "+teams[b].name+"'S HEADS OF STATE\n\nTeam "+(b+1)+": "+teams[b].name+"\nTotal points: "+Math.floor(teams[b].pts)+"\nDEFCON LEVEL: "+teams[b].dfcn+"\nMissile installations: "+teams[b].mi+"\nCities intact: "+teams[b].mama+"\nPopulation: "+(teams[b].pop*250000)+"\nNuclear Subs: "+teams[b].subs+"\nBombs remaining: "+teams[b].mgt);
+                points=points+teams[b].name+" points: "+Math.round(teams[b].pts)+". DEFCON: "+teams[b].dfcn+".\n";
+        }
+        alert(info+points);
         return;
 }
  
@@ -501,10 +505,11 @@ function makeTeamsCustom(teams, tN, z){
                 }
         }      
 }
-function makeTeamsStandard(teams, tN, z){
+function makeTeamsStandard(teams, tN){
         for (var i=0; i<tN; i++){
                 switch(parseInt(teams[i])){
                         case 1:
+                                alert("HUH?");
                                 var AMNAT={
                                         nmbr : 1,
                                         name : "AMNAT",
@@ -584,47 +589,3 @@ function makeTeamsStandard(teams, tN, z){
                 }
         }
 }
-=======
-<script src="/eschaton.js">
->>>>>>> Stashed changes
-</script>
-<style>
-p.serif {font-family: 'Lato', Arial, Helvetica, sans-serif;}
-h1.serif {font-family: 'Lato', Arial, Helvetica, sans-serif;}
-#expl
-{font-size: 1.em}
-</style>
-<style type="text/css"></style>
-</head>
-<body>
-<script>
-  window.fbAsyncInit = function() {
-    FB.init({
-      appId      : '353289798180135',
-      xfbml      : true,
-      version    : 'v2.2'
-    });
-
-    // ADD ADDITIONAL FACEBOOK CODE HERE
-  };
-
-  (function(d, s, id){
-     var js, fjs = d.getElementsByTagName(s)[0];
-     if (d.getElementById(id)) {return;}
-     js = d.createElement(s); js.id = id;
-     js.src = "//connect.facebook.net/en_US/sdk.js";
-     fjs.parentNode.insertBefore(js, fjs);
-   }(document, 'script', 'facebook-jssdk'));
-</script>
-<br>
-<h1 class="serif" style="margin-left:2.5em;">Eschaton Lite</h1>
-<center><input type=button value="Launch Eschaton!"
-       onclick = setup() > </center>
-<p class="serif" id="expl" style="margin-left:5em; margin-right:5em;">So what in the world is Eschaton? It's pretty much the most complicated tennis-based game ever thought up. David Foster Wallace wrote about the fictional game in his 1996 novel, <em>Infinite Jest</em>.<br>This javascript game is meant to act as a companion to the real world game, keeping track of in-game statistics and number keeping. This version would be considered bare-bones compared to what DFW wrote about, and draws from <a href="http://nowhereband.org/eschaton.html" STYLE="TEXT-DECORATION: NONE;">this Eschaton-lite guide</a>.</p>
-<h1 class="serif" style="margin-left:2.5em;">Overview</h1>
-<p class="serif"; id="expl" style="margin-left:5em; margin-right:5em;">Essentially it is a cold-war simulation that almost always ends in chaos. Players, also known as Heads of State, take charge of alliances of countries. The five in this game are: <b>AMNAT</b>: America and NATO nations; <b>SOVWAR</b>: The Soviet Union and members of the Warsaw Pact; <b>INDPAK</b>: India and Pakistan; <b>IRLYBSIR</b>: Israel, Lybia, and Syria; and <b>REDCHI</b>: China.<br>The game is to take place on several adjacent tennis courts that make up a map of the northern hemisphere. Each team will use clothing to represent strategic military points. For our purposes, this will be made up of 10 Major Metropolitan Areas (MAMAs) and 5 shoes that can be moved and used as nuclear submarines from which players may attack hostile nations. Each MAMA contains 250,000 civilians, and for the purpose of Eschaton-lite, protecting them and destroying other countries' MAMAs and submarines is the main objective.<br>The five teams fall under either the Western or Eastern Blocs, with only AMNAT and SOVWAR committed to their side, respectively. The remaining nations are free agents and can make alliances accordingly. However, joining a side means casting your nation's fate with the entire Bloc's, so choose wisely.<br><br>Again, this is simply a brief overview of Eschaton. Be sure to check out <a href="http://nowhereband.org/eschaton.html" STYLE="TEXT-DECORATION: NONE;">the rule book</a> for more details! </p>
-<br/>
-<br/>
-</form>
-</body>
-</html>
